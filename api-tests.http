@@ -1,0 +1,158 @@
+@baseUrl = http://localhost:5000
+
+# ===== Optional: set IDs after you create documents =====
+@contactId = 691eacc1c62fe821fd719e66
+@projectId = 691eae16c62fe821fd719e6c
+@qualificationId = 691eae35c62fe821fd719e72
+
+# ===== Part 4 variables (set these after you register/sign in) =====
+@userId = 691eb6e13afcf4c0638b6906          
+@token_v6 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWViNmUxM2FmY2Y0YzA2MzhiNjkwNiIsImVtYWlsIjoiYWRtaW45QGV4YW1wbGUuY29tIiwiaWF0IjoxNzYzNjIxNTEwLCJleHAiOjE3NjM2MjUxMTB9.7Aa2lTmajG11zzpjv5nkuOYExf3hjtwqknzudu0cvgQ
+
+### CONTACTS – Create
+POST {{baseUrl}}/api/contacts
+Content-Type: application/json
+
+{
+  "firstname": "Tobi",
+  "lastname": "Badiru",
+  "email": "tobi@example.com"
+}
+###
+
+### CONTACTS – Get all
+GET {{baseUrl}}/api/contacts
+###
+
+### CONTACTS – Get by id
+GET {{baseUrl}}/api/contacts/{{contactId}}
+###
+
+### CONTACTS – Update by id
+PUT {{baseUrl}}/api/contacts/{{contactId}}
+Content-Type: application/json
+
+{
+  "lastname": "B."
+}
+###
+
+### CONTACTS – Delete by id
+DELETE {{baseUrl}}/api/contacts/{{contactId}}
+###
+
+
+# ===================== PROJECTS =====================
+
+### PROJECTS – Create
+POST {{baseUrl}}/api/projects
+Content-Type: application/json
+
+{
+  "title": "React Portfolio",
+  "firstname": "Tobi",
+  "lastname": "Badiru",
+  "email": "tobi@example.com",
+  "completion": "2025-10-31",
+  "description": "React + Node portfolio project."
+}
+###
+
+### PROJECTS – Get all
+GET {{baseUrl}}/api/projects
+###
+
+### PROJECTS – Get by id
+GET {{baseUrl}}/api/projects/{{projectId}}
+###
+
+### PROJECTS – Update by id
+PUT {{baseUrl}}/api/projects/{{projectId}}
+Content-Type: application/json
+
+{
+  "description": "Updated project description."
+}
+###
+
+### PROJECTS – Delete by id
+DELETE {{baseUrl}}/api/projects/{{projectId}}
+###
+
+
+# ===================== QUALIFICATIONS =====================
+
+### QUALIFICATIONS – Create
+POST {{baseUrl}}/api/qualifications
+Content-Type: application/json
+
+{
+  "title": "Software Engineering Diploma",
+  "firstname": "Tobi",
+  "lastname": "Badiru",
+  "email": "tobi@example.com",
+  "completion": "2024-05-01",
+  "description": "Centennial College coursework in AI and Software Engineering."
+}
+###
+
+### QUALIFICATIONS – Get all
+GET {{baseUrl}}/api/qualifications
+###
+
+### QUALIFICATIONS – Get by id
+GET {{baseUrl}}/api/qualifications/{{qualificationId}}
+###
+
+### QUALIFICATIONS – Update by id
+PUT {{baseUrl}}/api/qualifications/{{qualificationId}}
+Content-Type: application/json
+
+{
+  "description": "Updated qualification description."
+}
+###
+
+### QUALIFICATIONS – Delete by id
+DELETE {{baseUrl}}/api/qualifications/{{qualificationId}}
+###
+
+
+# ===================== PART 4 (Week 6 Slides) =====================
+
+### USERS – Register (slides route)
+# Use a BRAND-NEW email each time to avoid "Email already in use".
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+
+{
+  "name": "Admin",
+  "email": "admin9@example.com",
+  "password": "Passw0rd!"
+}
+###
+# Copy the returned "_id" and paste into @userId at the top.
+
+### AUTH – Sign in (slides)
+POST {{baseUrl}}/auth/signin
+Content-Type: application/json
+
+{
+  "email": "admin9@example.com",
+  "password": "Passw0rd!"
+}
+###
+# Copy the "token" (NO quotes) and paste into @token_v6 at the top.
+
+### USERS – Read (PROTECTED with Bearer token)
+GET {{baseUrl}}/api/users/{{userId}}
+Authorization: Bearer {{token_v6}}
+###
+
+### USERS – Read (NO TOKEN → should be 401)
+GET {{baseUrl}}/api/users/{{userId}}
+###
+
+### AUTH – Sign out (slides)
+GET {{baseUrl}}/auth/signout
+###
